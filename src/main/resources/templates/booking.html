@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Planning Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<h1>Wedding Planning Booking</h1>
+<form action="#" th:action="@{/submitBooking}" th:object="${booking}" method="post">
+    <!-- Personal Information -->
+    <div class="form-group">
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" th:field="*{fullName}" required>
+    </div>
+    <div class="form-group">
+        <label for="contactNumber">Contact Number:</label>
+        <input type="text" id="contactNumber" th:field="*{contactNumber}" required>
+    </div>
+    <div class="form-group">
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" th:field="*{email}" required>
+    </div>
+    <div class="form-group">
+        <label for="weddingDate">Wedding Date:</label>
+        <input type="date" id="weddingDate" th:field="*{weddingDate}" required>
+    </div>
+
+    <!-- Venue Selection -->
+    <div class="form-group">
+        <label for="venue">Select Venue:</label>
+        <select id="venue" th:field="*{venue}" required>
+            <option value="">-- Choose a Venue --</option>
+            <option th:each="venue : ${availableVenues}" th:value="${venue}" th:text="${venue}"></option>
+        </select>
+    </div>
+
+    <!-- Timeslot Selection -->
+    <div class="form-group">
+        <label for="timeslot">Select Timeslot:</label>
+        <select id="timeslot" th:field="*{timeslot}" required>
+            <option value="">-- Choose a Timeslot --</option>
+            <option th:each="timeslot : ${availableTimeslots}" th:value="${timeslot}" th:text="${timeslot}"></option>
+        </select>
+    </div>
+
+    <!-- Special Requests -->
+    <div class="form-group">
+        <label for="specialRequests">Special Requests:</label>
+        <textarea id="specialRequests" th:field="*{specialRequests}" rows="4"></textarea>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="form-group">
+        <button type="submit">Submit Booking</button>
+    </div>
+</form>
+</body>
+</html>
