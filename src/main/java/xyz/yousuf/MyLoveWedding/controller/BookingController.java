@@ -22,7 +22,6 @@ public class BookingController {
     @Autowired
     private BookingRepository bookingRepository;
 
-
     @GetMapping("/view")
     List<Booking> viewAllBookings(){
         List<Booking> allBookings =  bookingRepository.findAll();
@@ -36,12 +35,13 @@ public class BookingController {
     }
 
     @DeleteMapping("/delete/{id}")
-    ResponseEntity deleteBooking(@PathVariable Long id){
+    ResponseEntity<?> deleteBooking(@PathVariable Long id){
+
         try {
             bookingRepository.deleteById(id);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return ResponseEntity.ok("Success");
+        return ResponseEntity.ok(bookingRepository.findAll());
     }
 }

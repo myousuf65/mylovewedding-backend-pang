@@ -10,5 +10,7 @@ import java.util.List;
 public interface VenueRepository extends JpaRepository<Venue, Long> {
      List<Venue> findAll();
 
+     List<Venue> findByIsDeleteFalse();
+
     Venue findByVenueName(String venue);
 }

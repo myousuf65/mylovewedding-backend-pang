@@ -6,13 +6,15 @@ public class BookingDto {
     String phone;
     String timeslot;
     String venue;
+    String date;
 
-    public BookingDto(String name, String email, String phone, String timeslot, String venue) {
+    public BookingDto(String name, String email, String phone, String timeslot, String venue, String date) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.timeslot = timeslot;
         this.venue = venue;
+        this.date = date;
     }
 
     public String getName() {
@@ -53,5 +55,13 @@ public class BookingDto {
 
     public void setVenue(String venue) {
         this.venue = venue;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

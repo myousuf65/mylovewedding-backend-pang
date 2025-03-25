@@ -3,6 +3,7 @@ package xyz.yousuf.MyLoveWedding.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import xyz.yousuf.MyLoveWedding.dto.AddVenue;
 import xyz.yousuf.MyLoveWedding.entities.Venue;
 import xyz.yousuf.MyLoveWedding.service.VenueService;
 import java.util.List;
@@ -25,7 +26,7 @@ public class VenueController {
     }
 
     @PostMapping("/add")
-    String addVenue(@RequestBody Venue venue){
+    String addVenue(@RequestBody AddVenue venue){
         String result = service.addVenue(venue);
         return result;
     }
@@ -37,8 +38,8 @@ public class VenueController {
     }
 
     @DeleteMapping("/delete/{id}")
-    String deleteVenue(@PathVariable Long id){
-        String result = service.deleteBooking(id);
-        return result;
+    ResponseEntity<?> deleteVenue(@PathVariable Long id){
+        List<Venue> result = service.deleteVenue(id);
+        return ResponseEntity.ok(result);
     }
 }

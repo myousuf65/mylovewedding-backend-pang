@@ -1,7 +1,10 @@
 package xyz.yousuf.MyLoveWedding.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import xyz.yousuf.MyLoveWedding.dto.AddVenue;
 import xyz.yousuf.MyLoveWedding.entities.Venue;
 import xyz.yousuf.MyLoveWedding.repository.VenueRepository;
 
@@ -13,14 +16,20 @@ public class VenueService {
 
     @Autowired
     private VenueRepository repository;
+    @Autowired
+    private VenueRepository venueRepository;
 
 
     public  List<Venue> getAllVenues(){
-        return repository.findAll();
+        return repository.findByIsDeleteFalse();
     }
 
-    public String addVenue(Venue venue) {
-        repository.save(venue);
+    public String addVenue(AddVenue venue) {
+        Venue ven = new Venue();
+        ven.setAddress(venue.getVenueAddress());
+        ven.setVenueName(venue.getVenueName());
+
+        repository.save(ven);
         return "success";
     }
 
@@ -50,4 +59,17 @@ public class VenueService {
         }
         return "success";
     }
+
+    public List<Venue> deleteVenue(Long id) {
+        Venue venue = venueRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Not Found"));
+
+        venue.setDelete(true);
+
+        venueRepository.save(venue);
+        return venueRepository.findByIsDeleteFalse();
+    }
+
+//   @DeleteMapping("/venue/delete/")
+//   ResponseEntity<?> deleteVenue()
 }

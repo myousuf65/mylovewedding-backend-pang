@@ -29,12 +29,16 @@ public class Booking {
     @JoinColumn(name ="venue_id")
     private Venue venue;
 
+    private String Date;
+
     public Booking(){}
-    public Booking(Long id, Customer customer, String timing, Venue venue) {
+
+    public Booking(Long id, Customer customer, String timing, Venue venue, String date) {
         this.id = id;
         this.customer = customer;
         this.timing = timing;
         this.venue = venue;
+        this.Date = date;
     }
 
     public Long getId() {
@@ -69,6 +73,15 @@ public class Booking {
         this.venue = venue;
     }
 
+    public String getDate() {
+        return Date;
+    }
+
+    public void setDate(String date) {
+        Date = date;
+    }
+
+
     @Override
     public String toString() {
         return "Booking{" +
@@ -76,6 +89,7 @@ public class Booking {
                 ", customer=" + customer +
                 ", timing='" + timing + '\'' +
                 ", venue=" + venue +
+                ", Date='" + Date + '\'' +
                 '}';
     }
 }

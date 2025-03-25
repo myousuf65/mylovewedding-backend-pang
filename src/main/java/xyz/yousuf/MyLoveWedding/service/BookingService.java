@@ -46,7 +46,9 @@ public class BookingService {
             booking.setCustomer(newCustomer);
             booking.setTiming(bookingDto.getTimeslot());
             booking.setVenue(venue.orElse(null));
+            booking.setDate(bookingDto.getDate());
             Booking savedBooking = bookingRepository.save(booking);
+            bookingRepository.flush();
             return savedBooking;
 
         } else{
@@ -54,9 +56,10 @@ public class BookingService {
             booking.setCustomer(customer);
             booking.setTiming(bookingDto.getTimeslot());
             booking.setVenue(venue.orElse(null));
-
+            booking.setDate(bookingDto.getDate());
 
             Booking savedBooking = bookingRepository.save(booking);
+            bookingRepository.flush();
             return savedBooking;
 
         }

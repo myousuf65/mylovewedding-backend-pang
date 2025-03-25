@@ -1,7 +1,16 @@
 package xyz.yousuf.MyLoveWedding.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "venue")
 public class Venue {
@@ -22,45 +31,6 @@ public class Venue {
 
     private String address;
 
-    public Venue(Long venueId, String venueName, String address) {
-        this.venueId = venueId;
-        this.venueName = venueName;
-        this.address = address;
-    }
-
-    public Venue() {
-    }
-
-    @Override
-    public String toString() {
-        return "Venue{" +
-                "venueId=" + venueId +
-                ", venueName='" + venueName + '\'' +
-                ", address='" + address + '\'' +
-                '}';
-    }
-
-    public Long getVenueId() {
-        return venueId;
-    }
-
-    public void setVenueId(Long venueId) {
-        this.venueId = venueId;
-    }
-
-    public String getVenueName() {
-        return venueName;
-    }
-
-    public void setVenueName(String venueName) {
-        this.venueName = venueName;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
+    @ColumnDefault("false")
+    private boolean isDelete;
 }
