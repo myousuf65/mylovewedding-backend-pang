@@ -2,7 +2,16 @@ package xyz.yousuf.MyLoveWedding.entities;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name ="booking")
 public class Booking {
@@ -23,72 +32,33 @@ public class Booking {
     @JoinColumn(referencedColumnName = "id", name = "customer_id")
     private Customer customer;
 
-    private String timing;
-
     @ManyToOne()
     @JoinColumn(name ="venue_id")
     private Venue venue;
 
+    @ManyToOne
+    @JoinColumn(name = "lawyer_id")
+    private Lawyer lawyer;
+
+    @ManyToOne
+    @JoinColumn(name = "stylist_id")
+    private Stylist stylist;
+
+    @ManyToOne
+    @JoinColumn(name = "photographer_id")
+    private Photographer photographer;
+
     private String Date;
-
-    public Booking(){}
-
-    public Booking(Long id, Customer customer, String timing, Venue venue, String date) {
-        this.id = id;
-        this.customer = customer;
-        this.timing = timing;
-        this.venue = venue;
-        this.Date = date;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public String getTiming() {
-        return timing;
-    }
-
-    public void setTiming(String timing) {
-        this.timing = timing;
-    }
-
-    public Venue getVenue() {
-        return venue;
-    }
-
-    public void setVenue(Venue venue) {
-        this.venue = venue;
-    }
-
-    public String getDate() {
-        return Date;
-    }
-
-    public void setDate(String date) {
-        Date = date;
-    }
-
 
     @Override
     public String toString() {
         return "Booking{" +
                 "id=" + id +
                 ", customer=" + customer +
-                ", timing='" + timing + '\'' +
                 ", venue=" + venue +
+                ", lawyer=" + lawyer +
+                ", stylist=" + stylist +
+                ", photographer=" + photographer +
                 ", Date='" + Date + '\'' +
                 '}';
     }
